@@ -27,7 +27,7 @@ yarn
 ```
 
 - Create a [tru.ID Account](https://tru.id)
-  -Install the tru.ID CLI via:
+- Install the tru.ID CLI via:
 
 ```bash
 npm i -g @tru_id/cli
