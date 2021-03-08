@@ -35,7 +35,7 @@ npm i -g @tru_id/cli
 yarn add gloabl @tru_id/cli
 ```
 
--Input your tru.ID credentials which can be found within the tru.ID [console](https://developer.tru.id/console)
+- Input your tru.ID credentials which can be found within the tru.ID [console](https://developer.tru.id/console)
 
 - Create a new tru.ID project within the server directory via:
 
