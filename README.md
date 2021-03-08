@@ -63,9 +63,9 @@ npm run ios
 
 ## References
 
-[tru.ID docs](https://developer.tru.id/docs)
-[Running React Native on a physical device guide](https://reactnative.dev/docs/running-on-device)
-[React Native Environment guide](https://reactnative.dev/docs/environment-setup)
+- [tru.ID docs](https://developer.tru.id/docs)
+- [Running React Native on a physical device guide](https://reactnative.dev/docs/running-on-device)
+- [React Native Environment guide](https://reactnative.dev/docs/environment-setup)
 
 ## Meta
 
