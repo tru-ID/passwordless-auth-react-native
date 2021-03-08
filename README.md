@@ -18,12 +18,20 @@ Clone the `starter-files` branch via:
 git clone -b starter-files --single-branch https://github.com/tru-ID/sim-card-auth-react-native.git
 ```
 
-Restore dependencies via:
+To restore dependencies for server, open a new terminal and run:
 
 ```bash
-npm install
+yarn yrrs #this also starts the dev server
 #or
-yarn
+npm run nrrs #this also starts the dev server
+```
+
+To restore dependencies for mobile (React Native), open a new terminal and run:
+
+```bash
+yarn yrrm
+#or
+npm run nrrm
 ```
 
 Create a [tru.ID Account](https://tru.id)
@@ -61,6 +69,14 @@ yarn ios
 #or
 npm run ios
 ```
+
+## Troubleshooting
+
+While trying to run on Android, you might run into `Could not find or load main class org.gradle.wrapper.GradleWrapperMain` error. To resolve it:
+
+- [Install Gradle](https://gradle.org/install/)
+- Navigate to the Android directory and run `gradle wrapper`
+- Run `yarn android` or `npm run android`
 
 ## References
 
