@@ -55,6 +55,10 @@ To start the project, ensure you have a physical device connected (see [Running 
 yarn android
 #or
 npm run android
+#or
+yarn ios
+#or
+npm run ios
 ```
 
 ## References
