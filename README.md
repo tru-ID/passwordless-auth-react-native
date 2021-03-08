@@ -62,6 +62,14 @@ yarn ios
 npm run ios
 ```
 
+## Troubleshooting
+
+While trying to run on Android, you might run into `Could not find or load main class org.gradle.wrapper.GradleWrapperMain` error. To resolve it:
+
+- [Install Gradle](https://gradle.org/install/)
+- Navigate to the Android directory and run `gradle wrapper`
+- Run `yarn android` or `npm run android`
+
 ## References
 
 - [**tru.ID** docs](https://developer.tru.id/docs)
