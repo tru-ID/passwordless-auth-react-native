@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "sim-card-auth-react-native",
-=======
-  "name": "mobile",
->>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-<<<<<<< HEAD
     "@react-native-picker/picker": "^1.9.11",
     "axios": "^0.21.1",
     "country-data": "^0.0.31",
@@ -22,11 +17,6 @@
     "react-native": "0.63.4",
     "react-native-flash-message": "^0.1.23",
     "react-native-gesture-handler": "^1.10.3",
-=======
-    "axios": "^0.21.1",
-    "react": "16.13.1",
-    "react-native": "0.63.4",
->>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
     "tru-sdk-react-native": "^0.1.6"
   },
   "devDependencies": {
