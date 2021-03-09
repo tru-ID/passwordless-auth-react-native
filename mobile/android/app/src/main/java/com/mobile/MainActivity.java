@@ -10,6 +10,10 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+<<<<<<< HEAD
     return "simCardAuthReactNative";
+=======
+    return "mobile";
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
   }
 }

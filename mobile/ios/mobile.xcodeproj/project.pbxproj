@@ -16,8 +16,11 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* mobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mobileTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+<<<<<<< HEAD
 		7326C10951E34481824E063D /* NotoSansJP-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 463CCAB4E30D479E98827E7D /* NotoSansJP-Bold.otf */; };
 		56215608F3E84F3CBFB0ABA6 /* NotoSansJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7E17A5CFCEC45DF8350AD3F /* NotoSansJP-Regular.otf */; };
+=======
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +56,11 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = mobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+<<<<<<< HEAD
 		463CCAB4E30D479E98827E7D /* NotoSansJP-Bold.otf */ = {isa = PBXFileReference; name = "NotoSansJP-Bold.otf"; path = "../assets/fonts/NotoSansJP-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C7E17A5CFCEC45DF8350AD3F /* NotoSansJP-Regular.otf */ = {isa = PBXFileReference; name = "NotoSansJP-Regular.otf"; path = "../assets/fonts/NotoSansJP-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+=======
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +150,10 @@
 				00E356EF1AD99517003FC87E /* mobileTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+<<<<<<< HEAD
 				A1FDACC226C94F87917A676C /* Resources */,
+=======
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -162,6 +171,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		A1FDACC226C94F87917A676C /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
@@ -172,6 +182,8 @@
 			sourceTree = "<group>";
 			path = "";
 		};
+=======
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -310,8 +322,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+<<<<<<< HEAD
 				7326C10951E34481824E063D /* NotoSansJP-Bold.otf in Resources */,
 				56215608F3E84F3CBFB0ABA6 /* NotoSansJP-Regular.otf in Resources */,
+=======
+>>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
