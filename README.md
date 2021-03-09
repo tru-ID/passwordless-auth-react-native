@@ -21,17 +21,14 @@ git clone -b starter-files --single-branch https://github.com/tru-ID/sim-card-au
 To restore dependencies for server, open a new terminal and run:
 
 ```bash
-yarn yrrs #this also starts the dev server
-#or
-npm run nrrs #this also starts the dev server
+npm run restore-server #this also starts the dev server
+
 ```
 
 To restore dependencies for mobile (React Native), open a new terminal and run:
 
 ```bash
-yarn yrrm
-#or
-npm run nrrm
+npm run restore-mobile
 ```
 
 Create a [tru.ID Account](https://tru.id)
@@ -40,8 +37,7 @@ Install the tru.ID CLI via:
 
 ```bash
 npm i -g @tru_id/cli
-#or
-yarn add global @tru_id/cli
+
 ```
 
 Input your **tru.ID** credentials which can be found within the tru.ID [console](https://developer.tru.id/console)
@@ -61,13 +57,10 @@ Still in the server directory, run the command `cp .env.example .env` and update
 To start the project, ensure you have a physical device connected (see [Running React Native on a physical device guide](https://reactnative.dev/docs/running-on-device) ) then run:
 
 ```bash
-yarn android
-#or
 npm run android
 #or
-yarn ios
-#or
 npm run ios
+
 ```
 
 ## Troubleshooting

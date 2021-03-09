@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import morgan from 'morgan';
 import { config } from 'dotenv';
 import { __PROD__ } from './helpers/constants';
@@ -10,7 +9,6 @@ import { getSubscriberCheck } from './helpers/getSubscriberCheck';
 (() => {
   config();
   const app = express();
-  app.use(cors());
   app.use(express.json());
   app.use(morgan(!__PROD__ ? 'dev' : 'common'));
   app.get('/', (_, res) =>
@@ -19,31 +17,29 @@ import { getSubscriberCheck } from './helpers/getSubscriberCheck';
   app.post('/api/subscribercheck', async (req, res) => {
     const { phone_number }: reqBodyType = req.body;
     try {
-
-        const access_token = await createAccessToken();
-        const { check_id, check_url } = await createSubscriberCheck(
-          phone_number,
-          access_token
-        );
-        res.status(200).send({
-          message: 'success',
-          data: { check_id, check_url, access_token },
-        });
+      const access_token = await createAccessToken();
+      const { check_id, check_url } = await createSubscriberCheck(
+        phone_number,
+        access_token
+      );
+      res.status(200).send({
+        message: 'success',
+        data: { check_id, check_url, access_token },
+      });
     } catch (e) {
-        throw new Error(e.message)
+      throw new Error(e.message);
     }
   });
-  app.get('/api/subscribercheck', async (req, res) => {
-    const { check_id, access_token } = req.query;
+  app.get('/api/subscribercheck/:checkId', async (req, res) => {
+    const { checkId: check_id } = req.params;
+    const { access_token } = req.query;
     try {
-
-        const resp = await getSubscriberCheck(
-          check_id as string,
-          access_token as string
-        );
-        res.status(200).send({ message: 'SubscriberCheck Successful', data: resp });
-    } catch(e){
-        throw new Error(e.message)
+      const resp = await getSubscriberCheck(check_id, access_token as string);
+      res
+        .status(200)
+        .send({ message: 'SubscriberCheck Successful', data: resp });
+    } catch (e) {
+      throw new Error(e.message);
     }
   });
   const port = process.env.PORT || 4000;

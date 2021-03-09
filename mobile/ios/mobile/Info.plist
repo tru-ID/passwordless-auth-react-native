@@ -38,11 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-<<<<<<< HEAD
 	<string/>
-=======
-	<string></string>
->>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -57,13 +53,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-<<<<<<< HEAD
 	<key>UIAppFonts</key>
 	<array>
 		<string>NotoSansJP-Bold.otf</string>
 		<string>NotoSansJP-Regular.otf</string>
 	</array>
-=======
->>>>>>> b5036777cc7bbcce12353e4d61d70b4391d85b57
 </dict>
 </plist>

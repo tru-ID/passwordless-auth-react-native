@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "yrrs": "cd server && yarn && yarn dev",
-    "nrrs": "cd server && npm install && npm run dev",
-    "yrrm": "cd mobile && yarn",
-    "nrrm": "cd mobile && npm install"
+    "restore-server": "cd server && npm install && npm run dev",
+    "restore-mobile": "cd mobile && npm install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tru-ID/sim-card-auth-react-native.git"
+  },
+  "devDependencies": {
+    "yarn": "^1.22.10"
   }
 }
