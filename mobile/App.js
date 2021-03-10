@@ -14,6 +14,7 @@ import {
   Text,
   StatusBar,
   TextInput,
+  Button,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-picker/picker';
@@ -60,14 +61,7 @@ const App = () => {
             value={phoneNumber}
           />
         </View>
-        <TouchableWithoutFeedback
-          style={{ alignItems: 'center' }}
-          onPress={onPressHandler}
-        >
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Authenticate</Text>
-          </View>
-        </TouchableWithoutFeedback>
+        <Button title='Authenticate' color='#e67e22' onPress={onPressHandler} />
         <FlashMessage />
       </SafeAreaView>
     </>
@@ -102,21 +96,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#fff',
     fontFamily: 'inherit',
-  },
-
-  button: {
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#e67e22',
-    borderRadius: 8,
-    width: 0.6 * Dimensions.get('window').width,
-    // cursor: 'pointer',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 20,
-    fontFamily: 'NotoSansJP-Regular',
-  },
+  }
 });
 
 export default App;
