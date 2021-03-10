@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 20,
-    fontFamily: 'NotoSansJP-Regulae',
+    fontFamily: 'NotoSansJP-Regular',
   },
   form: {
     flexDirection: 'row',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 20,
-    fontFamily: 'noto-reg',
+    fontFamily: 'NotoSansJP-Regular',
   },
 });
 
