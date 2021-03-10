@@ -1,0 +1,17 @@
+{
+  "name": "tru-sim-card-auth-react-native-example",
+  "version": "1.0.0",
+  "description": "Example React Native app for tru-sim-card-auth-react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restore-mobile": "cd mobile && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tru-ID/sim-card-auth-react-native.git"
+  },
+  "devDependencies": {
+    "yarn": "^1.22.10"
+  }
+}
