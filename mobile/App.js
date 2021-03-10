@@ -19,14 +19,15 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-picker/picker';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
-import useTransformCountryCodes from './libs/hooks/useTransformCountryCodes';
+import useCountryCodes from './libs/hooks/useCountryCodes';
 const App = () => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
   const [countryCode, setCountryCode] = React.useState('');
   const [data, setData] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const callingCode = useTransformCountryCodes();
+  const callingCode = useCountryCodes();
+
   // we'll handle SubscriberCheck in the function below
   const onPressHandler = () => {};
   return (
@@ -59,7 +60,10 @@ const App = () => {
             value={phoneNumber}
           />
         </View>
-        <TouchableWithoutFeedback style={{alignItems: 'center'}} onPress={onPressHandler}>
+        <TouchableWithoutFeedback
+          style={{ alignItems: 'center' }}
+          onPress={onPressHandler}
+        >
           <View style={styles.button}>
             <Text style={styles.buttonText}>Authenticate</Text>
           </View>
