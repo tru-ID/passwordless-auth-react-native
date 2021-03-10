@@ -1,11 +1,10 @@
 {
   "name": "tru-sim-card-auth-react-native-example",
   "version": "1.0.0",
-  "description": "Example Server for tru-sim-card-auth-react-native",
+  "description": "Example React Native app for tru-sim-card-auth-react-native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "restore-server": "cd server && npm install && npm run dev",
     "restore-mobile": "cd mobile && npm install"
   },
   "repository": {
