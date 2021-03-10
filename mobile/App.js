@@ -14,22 +14,78 @@ import {
   Text,
   StatusBar,
   TextInput,
+  Button,
+  ActivityIndicator,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Picker } from '@react-native-picker/picker';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
+import axios from 'axios';
+import TruSDK from 'tru-sdk-react-native';
 import useCountryCodes from './libs/hooks/useCountryCodes';
+import { transformPhoneNumber } from './libs/helpers/transformPhoneNumbers';
 const App = () => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [countryCode, setCountryCode] = React.useState('');
+  const [callingCode, setCallingCode] = React.useState('');
   const [data, setData] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const callingCode = useCountryCodes();
+  const callingCodes = useCountryCodes();
+  // setup axios BaseURL in the format : https://{subdomain}.loca.lt
+  axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
 
+  // check if there is a match i.e. phone number has been verified and no_sim_change and render toast UI
+  React.useEffect(() => {
+    if (data) {
+      data.match && data.no_sim_change
+        ? showMessage({
+            message: 'Phone Verified',
+            type: 'success',
+            style: styles.toastContainer,
+          })
+        : showMessage({
+            message: 'Verification failed. Please Try Again Later',
+            type: 'danger',
+            style: styles.toastContainer,
+          });
+    }
+  }, [data]);
+  // render toast UI if there's an error
+  React.useEffect(() => {
+    if (error) {
+      showMessage({
+        message: error,
+        type: 'danger',
+        style: styles.toastContainer,
+      });
+    }
+  }, [error]);
   // we'll handle SubscriberCheck in the function below
-  const onPressHandler = () => {};
+  const onPressHandler = async () => {
+    setLoading(true);
+    const body = {
+      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+    };
+    console.log(body);
+    // make a request to the SubscriberCheck endpoint to get back the check_url
+    try {
+      const response = await axios.post('/subscriber-check', body);
+      console.log(response.data);
+      // pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
+      await TruSDK.openCheckUrl(response.data.check_url);
+      // make request to subscriber check endpoint to get the SubscriberCheck result
+      const resp = await axios.get(
+        `/subscriber-check/${response.data.check_id}`
+      );
+      console.log(resp.data);
+      setData(resp.data);
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
+    }
+  };
   return (
     <>
       <StatusBar barStyle='light-content' />
@@ -38,12 +94,12 @@ const App = () => {
         <Text style={styles.paragraph}>and we'll handle the rest</Text>
         <View style={styles.form}>
           <Picker
-            selectedValue={countryCode}
+            selectedValue={callingCode}
             style={{ height: 50, width: 100, fontFamily: 'noto-reg' }}
-            onValueChange={(itemValue) => setCountryCode(itemValue)}
+            onValueChange={(itemValue) => setCallingCode(itemValue)}
           >
             <Picker.Item label='Select Country Code' value='' />
-            {callingCode.map((el, i) => (
+            {callingCodes.map((el, i) => (
               <Picker.Item
                 key={i}
                 label={`${el.country_code} ${el.calling_code}`}
@@ -60,14 +116,16 @@ const App = () => {
             value={phoneNumber}
           />
         </View>
-        <TouchableWithoutFeedback
-          style={{ alignItems: 'center' }}
-          onPress={onPressHandler}
-        >
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Authenticate</Text>
-          </View>
-        </TouchableWithoutFeedback>
+        {loading ? (
+          <ActivityIndicator size='large' color='#00ff00' />
+        ) : (
+          <Button
+            title='Authenticate'
+            color='#e67e22'
+            onPress={onPressHandler}
+          />
+        )}
+
         <FlashMessage />
       </SafeAreaView>
     </>
@@ -78,6 +136,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: 10,
+  },
+  toastContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   heading: {
     fontSize: 0.1 * Dimensions.get('window').width,

@@ -3,15 +3,17 @@ export const transformPhoneNumber = (callingCode, phoneNumber) => {
   let transformNorthAmericanNumbers = '';
   if (callingCode === '+1') {
     // transform US, Canada numbers from (415) 555-0100 to 4155550100
-    transformNorthAmericanNumbers = phoneNumber
-      .trim()
-      .split('(')[1]
-      .split(')')
-      .join('')
-      .split('-')
-      .join('')
-      .split(' ')
-      .join('');
+    transformNorthAmericanNumbers = phoneNumber.includes('(')
+      ? phoneNumber
+          .trim()
+          .split('(')[1]
+          .split(')')
+          .join('')
+          .split('-')
+          .join('')
+          .split(' ')
+          .join('')
+      : phoneNumber.trim();
   }
   // check if there's a space i.e. user copied phone number e.g. 07700 900000 and remove the space
   const phone_number = phoneNumber.trim().includes(' ')
