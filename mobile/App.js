@@ -59,7 +59,7 @@ const App = () => {
             value={phoneNumber}
           />
         </View>
-        <TouchableWithoutFeedback onPress={onPressHandler}>
+        <TouchableWithoutFeedback style={{alignItems: 'center'}} onPress={onPressHandler}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Authenticate</Text>
           </View>
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
+    marginBottom: 20,
   },
   textInput: {
     padding: 15,
@@ -100,11 +101,11 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    padding: 15,
+    padding: 10,
     alignItems: 'center',
     backgroundColor: '#e67e22',
     borderRadius: 8,
-    marginTop: '10px',
+    width: 0.6 * Dimensions.get('window').width,
     // cursor: 'pointer',
   },
   buttonText: {
