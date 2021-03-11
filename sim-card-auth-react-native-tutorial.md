@@ -172,7 +172,7 @@ const App = ()=> {
 
 Your app should now look like this:
 
-![alt text](./images/step1.jpg 'Step1 App')
+![alt text](./images/step1.jpg 'Step1')
 
 In order to perform the SubscriberCheck Authentication, in the `onPressHandler` function and paste the following lines of code:
 
@@ -327,6 +327,10 @@ setError(e.message);
 }
 ```
 
+Your app UI while initiating the SubscriberCheck, using the **tru-ID** React Native SDK and requesting results will look like this:
+
+![alt text](./images/loading.jpg 'loading state')
+
 # Updating the UI with the result
 
 The last thing we need to do is inform users whether or not there is a match i.e. the phone number is verified and if the SIM has not changed recently. We also need to take care of any errors and let the user know. For that we'll use toast notifications. Paste the following code into `app.js` before `onPressHandler`
@@ -367,6 +371,8 @@ Above we have two `React.useEffect` functions. In the first function, we add `da
 In the second function we add `error` as a dependency so whenever `error` changes the effect re-runs. Inside the effect we check if we have an error and render a toast UI with the error message.
 
 Your UI if the SubscriberCheck is successful should look like this:
+
+![alt text](./images/success.jpg 'Successful authentication')
 
 ## Wrapping Up
 
