@@ -108,7 +108,7 @@ import axios from 'axios';
 
 const App = () => {
 
-    axios.defaults.baseURL = 'https://{subdomain}.loca.lt'; 
+    axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
     // where {subdomain} is the subdomain of the localtunnel URL
 
     const onPressHandler = () => {};
@@ -171,6 +171,7 @@ const App = ()=> {
 ```
 
 Your app should now look like this:
+
 ![alt text](./images/step1.jpg 'Step1 App')
 
 In order to perform the SubscriberCheck Authentication, in the `onPressHandler` function and paste the following lines of code:
