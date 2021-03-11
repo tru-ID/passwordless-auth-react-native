@@ -22,16 +22,12 @@ import { Picker } from '@react-native-picker/picker';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
 import axios from 'axios';
-import TruSDK from 'tru-sdk-react-native';
-import useCountryCodes from './libs/hooks/useCountryCodes';
-import { transformPhoneNumber } from './libs/helpers/transformPhoneNumbers';
+import TruSDK from 'tru-sdk-react-native'
 const App = () => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [callingCode, setCallingCode] = React.useState('');
   const [data, setData] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const callingCodes = useCountryCodes();
   // setup axios BaseURL in the format : https://{subdomain}.loca.lt
   axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
 
@@ -65,7 +61,7 @@ const App = () => {
   const onPressHandler = async () => {
     setLoading(true);
     const body = {
-      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+      phone_number: phoneNumber,
     };
     console.log(body);
     // make a request to the SubscriberCheck endpoint to get back the check_url
@@ -93,20 +89,6 @@ const App = () => {
         <Text style={styles.heading}>Enter your phone number</Text>
         <Text style={styles.paragraph}>and we'll handle the rest</Text>
         <View style={styles.form}>
-          <Picker
-            selectedValue={callingCode}
-            style={{ height: 50, width: 100, fontFamily: 'noto-reg' }}
-            onValueChange={(itemValue) => setCallingCode(itemValue)}
-          >
-            <Picker.Item label='Select Country Code' value='' />
-            {callingCodes.map((el, i) => (
-              <Picker.Item
-                key={i}
-                label={`${el.country_code} ${el.calling_code}`}
-                value={el.calling_code}
-              />
-            ))}
-          </Picker>
           <TextInput
             style={styles.textInput}
             keyboardType='phone-pad'
@@ -151,7 +133,6 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansJP-Regular',
   },
   form: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
@@ -165,20 +146,6 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#fff',
     fontFamily: 'inherit',
-  },
-
-  button: {
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#e67e22',
-    borderRadius: 8,
-    width: 0.6 * Dimensions.get('window').width,
-    // cursor: 'pointer',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 20,
-    fontFamily: 'NotoSansJP-Regular',
   },
 });
 
