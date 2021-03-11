@@ -16,52 +16,15 @@ import {
   TextInput,
   Button,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Picker } from '@react-native-picker/picker';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
-import useCountryCodes from './libs/hooks/useCountryCodes';
 const App = () => {
-  const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [countryCode, setCountryCode] = React.useState('');
-  const [data, setData] = React.useState();
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
-  const callingCode = useCountryCodes();
-
   // we'll handle SubscriberCheck in the function below
   const onPressHandler = () => {};
   return (
     <>
       <StatusBar barStyle='light-content' />
       <SafeAreaView style={styles.container}>
-        <Text style={styles.heading}>Enter your phone number</Text>
-        <Text style={styles.paragraph}>and we'll handle the rest</Text>
-        <View style={styles.form}>
-          <Picker
-            selectedValue={countryCode}
-            style={{ height: 50, width: 100, fontFamily: 'noto-reg' }}
-            onValueChange={(itemValue) => setCountryCode(itemValue)}
-          >
-            <Picker.Item label='Select Country Code' value='' />
-            {callingCode.map((el, i) => (
-              <Picker.Item
-                key={i}
-                label={`${el.country_code} ${el.calling_code}`}
-                value={el.calling_code}
-              />
-            ))}
-          </Picker>
-          <TextInput
-            style={styles.textInput}
-            keyboardType='phone-pad'
-            placeholder='ex. (415) 555-0100'
-            placeholderTextColor='#d3d3d3'
-            onChangeText={(text) => setPhoneNumber(text)}
-            value={phoneNumber}
-          />
-        </View>
-        <Button title='Authenticate' color='#e67e22' onPress={onPressHandler} />
         <FlashMessage />
       </SafeAreaView>
     </>
@@ -82,7 +45,6 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansJP-Regular',
   },
   form: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
@@ -96,7 +58,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#fff',
     fontFamily: 'inherit',
-  }
+  },
 });
 
 export default App;
