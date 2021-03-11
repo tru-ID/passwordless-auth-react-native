@@ -15,11 +15,9 @@ The SubscriberCheck workflow is as follows:
 1. Get the User's Phone Number on Mobile Device
 2. Send the Phone Number the Application Server
 3. Create a SubscriberCheck using the SubscriberCheck API
-4. Return the SubscriberCheck URL to the Mobile Device
-5. Request the SubscriberCheck URL on the Mobile Device over Mobile Data
-6. Mobile Device requests SubscriberCheck Result via the Application Server
-7. Application Server gets SubscriberCheck Result from SubscriberCheck API
-8. Application Server returns the SubscriberCheck Result, including SIM changed status, to the Mobile Device
+4. Request the SubscriberCheck URL on the Mobile Device over Mobile Data
+5. Mobile Device requests SubscriberCheck Result via the Application Server
+6. Application Server returns the SubscriberCheck Result, including SIM changed status, to the Mobile Device
 
 ## Getting Started
 
@@ -29,21 +27,25 @@ In order to follow along with this tutorial headover to the [SIM Card Based Auth
 
 ## Performing the SubscriberCheck Authentication - I
 
-Before we perform any action we need to copy this utility line `axios.defaults.baseURL = 'https://{subdomain}.loca.lt';` into our `app.js` before the `onPressHandlerFunction`, where `{subdomain}` is the local tunnel subdomain created when we run the server in the previous section.
+Before we perform any action we need to setup Axios to know where our development server is running. Set this up in `mobile/App.js` before the `onPressHandler`.
+
+```js
+import axios from 'axios';
+
+const App = () => {
+
+    axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
+
+    const onPressHandler = () => {};
+};
+```
 
 This helper helps keep things DRY so we don't rewrite the same Base URL repeatedly,
-
-Alternatively you could write:
-
-```
-axios.create({
-    baseURL: 'https://{subdomain}.loca.lt'
-})
-```
 
 In order to perform the SubscriberCheck Authentication, head over to `app.js` and in the `onPressHandler` function and paste the following lines of code:
 
 ```
+const onPressHandler = () => {
    setLoading(true);
     const body = {
       phone_number: transformPhoneNumber(callingCode, phoneNumber),
@@ -58,6 +60,7 @@ In order to perform the SubscriberCheck Authentication, head over to `app.js` an
       setLoading(false);
       setError(e.message);
     }
+}
 ```
 
 First off we set our loading state to `true` and this is necessary so we give the user a visual cue that something (a HTTP network request) is happening. Next, we set construct the body object setting the `phone_number` field to a helper function that helps transform phone numbers by appending the calling code, trimming white-space, handling copy-paste phone numbers etc.
@@ -111,22 +114,27 @@ The SDK forces mobile data connection and makes a get request to the SubscriberC
 The final code in the `onPressHandler` should be:
 
 ```
-setLoading(true);
+    // Step 1
+    setLoading(true);
     const body = {
-      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+      phone_number: phoneNumber,
     };
     console.log(body);
-    //make a request to the SubscriberCheck endpoint to get back the check_url
+    // Step 2: make a request to the SubscriberCheck endpoint to get back the check_url
     try {
       const response = await axios.post('/subscriber-check', body);
       console.log(response.data);
-      //pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
+      // Step 3: pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
       await TruSDK.openCheckUrl(response.data.check_url);
       //make request to subscriber check endpoint to get the SubscriberCheck result
+      
+      // Step 4: Get updated SubscriberCheck resource
       const resp = await axios.get(
         `/subscriber-check/${response.data.check_id}`
       );
       console.log(resp.data);
+      
+      // Step 5
       setData(resp.data);
       setLoading(false);
     } catch (e) {
