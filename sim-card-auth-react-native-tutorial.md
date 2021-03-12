@@ -244,7 +244,7 @@ Afterwards we add it to our list of imports at the top:
 
 ```
 ...
-import TruSDK from 'tru-sdk-react-native
+import TruSDK from 'tru-sdk-react-native'
 ```
 
 The **tru-ID** React Native SDK forces mobile data connection and makes a get request to the SubscriberCheck URL (`check_url`) and readies a result.
