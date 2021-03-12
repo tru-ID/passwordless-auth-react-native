@@ -180,7 +180,7 @@ In order to perform the SubscriberCheck Authentication, in the `onPressHandler` 
 const onPressHandler = () => {
    setLoading(true);
     const body = {
-      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+      phone_number:  phoneNumber,
     };
     console.log(body);
 }
@@ -213,7 +213,7 @@ The code in the `onPressHandler` thus far is:
 const onPressHandler = () => {
    setLoading(true);
     const body = {
-      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+      phone_number: phoneNumber,
     };
     console.log(body);
     //make a request to the SubscriberCheck endpoint to get back the check_url
@@ -264,7 +264,7 @@ The code in the `onPressHandler` thus far is:
 const onPressHandler = () => {
    setLoading(true);
     const body = {
-      phone_number: transformPhoneNumber(callingCode, phoneNumber),
+      phone_number:  phoneNumber,
     };
     console.log(body);
     //make a request to the SubscriberCheck endpoint to get back the check_url
@@ -304,7 +304,7 @@ The final code in the `onPressHandler` should be:
 const onPressHandler = () => {
 setLoading(true);
 const body = {
-phone_number: transformPhoneNumber(callingCode, phoneNumber),
+phone_number: phoneNumber,
 };
 console.log(body);
 //make a request to the SubscriberCheck endpoint to get back the check_url
