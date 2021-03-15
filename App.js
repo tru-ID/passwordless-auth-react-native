@@ -18,9 +18,11 @@ import {
 } from 'react-native';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
+
 const App = () => {
   // we'll handle SubscriberCheck in the function below
   const onPressHandler = () => {};
+
   return (
     <>
       <StatusBar barStyle='light-content' />
@@ -29,6 +31,7 @@ const App = () => {
       </SafeAreaView>
     </>
   );
+  
 };
 
 const styles = StyleSheet.create({
