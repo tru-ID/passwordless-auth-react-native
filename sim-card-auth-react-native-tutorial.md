@@ -1,39 +1,39 @@
-# SIM Card Based Mobile Authentication With React Native
+# SIM Card Based Mobile Authentication with React Native
 
-In today's tutorial you're going to learn how to authenticate your React Native applications with the [tru-ID SubscriberCheck API](https://developer.tru.id/docs/subscriber-check). Before we begin let's talk about why you would want to secure your applications with the **tru-ID** SubscriberCheck API.
+In this tutorial you're going to learn how to authenticate your React Native applications using the [tru.ID SubscriberCheck API](https://developer.tru.id/docs/subscriber-check). Before we begin let's talk about why you would want to secure your applications with the **tru.ID** SubscriberCheck API.
 
-## The tru-ID SubscriberCheck API
+## The **tru.ID** SubscriberCheck API
 
-The **tru-ID** SubscriberCheck API confirms the ownership of a mobile phone number by verifying the possession of an active SIM card with the same number. It also provides a flag that indicates if the SIM card associated with the mobile phone number has changed within the last seven days.
+The **tru.ID** SubscriberCheck API confirms the ownership of a mobile phone number by verifying the possession of an active SIM card with the same number. It also provides a flag that indicates if the SIM card associated with the mobile phone number has changed within the last seven days.
 
-All your users need to do is provide a phone number and the API will authenticate against that number.
-
-It's perfect for your applications as it adds an extra layer of security against SIM swapping / theft and can be used to augment existing 2FA workflows or as standalone authentication as we'll use in this tutorial.
+All your a user needs to do is provide a phone number and the API will verify that number is associated with their device. It can be used as a primary user verification mechanism or as an added layer of security against SIM swapping / theft within existing 2FA workflows. In this tutorial we'll use SubscriberCheck as a standalone authentication mechanism.
 
 The SubscriberCheck workflow is as follows:
 
-1. Get the User's Phone Number on Mobile Device
+1. Get the User's Phone Number on the Mobile Device
 2. Send the Phone Number the Application Server
 3. Create a SubscriberCheck using the SubscriberCheck API
 4. Return the SubscriberCheck URL to the Mobile Device
 5. Request the SubscriberCheck URL on the Mobile Device over Mobile Data
-6. Mobile Device requests SubscriberCheck Result via the Application Server
-7. Application Server gets SubscriberCheck Result from SubscriberCheck API
+6. Mobile Device requests the SubscriberCheck Result via the Application Server
+7. Application Server gets the SubscriberCheck Result from SubscriberCheck API
 8. Application Server returns the SubscriberCheck Result, including SIM changed status, to the Mobile Device
+
+In this tutorial we'll use a ready-made server and focus on the steps involving the React Native application.
 
 ## Before you begin
 
 Before you begin, there are a few requirements that have to be met:
 
 - An Android / Apple Phone with a SIM card and mobile data connection
-- For iOS: Require XCode >12
+- For iOS: XCode >12
 - For Android:
-  - Require JDK 14 (Java version 14.02 / Gradle v6.3).
+  - JDK 14 (Java version 14.02 / Gradle v6.3).
   - Android Studio or Android SDK manager via [Android developer downloads](https://developer.android.com/studio). VS Code would work as you aren't using a virtual device.
   - Set up the [React Native Environment](https://reactnative.dev/docs/environment-setup)
-- For metro bundler, require node version > 10
+- For metro bundler, Node.js version > 10
 
-## Get setup with tru-ID
+## Get setup with **tru.ID**
 
 Sign up for a [**tru.ID** account](https://developer.tru.id/signup) which comes with some free credit. Then install the [**tru.ID** CLI](https://github.com/tru-ID/cli):
 
@@ -79,11 +79,15 @@ In order to follow along with this tutorial headover to the [SIM Card Based Auth
 git clone -b starter-files --single-branch https://github.com/tru-ID/sim-card-auth-react-native.git
 ```
 
-To restore dependencies, open a new terminal and run:
+To install dependencies, open a new terminal, `cd sim-card-auth-react-native` and run:
 
+**TODO: feels like this should just be `npm install` now since we only have one application. I've moved the contents of `mobile` up. Let's see how it goes.**
+
+```bash
+npm install
 ```
-npm run restore-mobile
-```
+
+**TODO: Reviewed to here <-----------------------------**
 
 Once you've finished that step, start the development server via:
 
