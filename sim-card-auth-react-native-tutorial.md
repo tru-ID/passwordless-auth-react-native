@@ -87,8 +87,6 @@ To install dependencies, open a new terminal, `cd sim-card-auth-react-native` an
 npm install
 ```
 
-**TODO: Reviewed to here <-----------------------------**
-
 Once you've finished that step, start the development server via:
 
 ```bash
@@ -97,50 +95,33 @@ npm run android
 npm run ios
 ```
 
-Throughout this tutorial we'll be working in `mobile/app.js`.
-
 Your app should look like this:
 
 ![alt text](./images/starter.jpg 'Starter App')
 
 ## Get the user's phone number on Mobile Device
 
-Before we perform any action we need to setup Axios to know where our development server is running. Set this up in `mobile/App.js` before the `onPressHandler`.
+Let's start by adding the UI and statement management required for the user to input (`TextInput`) and submit their phone number (`Button`). We'll also add UI and state for checking if any work is in progress via a `loading` variable or if an error has occurred via `error`.
 
-```
-import axios from 'axios';
-
+```js
 const App = () => {
-
-    axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
-    // where {subdomain} is the subdomain of the localtunnel URL
-
-    const onPressHandler = () => {};
-};
-```
-
-This helper helps keep things DRY so we don't rewrite the same Base URL repeatedly.
-
-The next step is to keep track of state we'll need throughout this application. We'll do this above our utility.
-
-```
-const App = () => {
-const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [data, setData] = React.useState();
+  const [phoneNumber, setPhoneNumber] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
 
-    const onPressHandler = () => {};
-};
-```
+    React.useEffect(() => {
+      if (error) {
+        showMessage({
+          message: error,
+          type: 'danger',
+          style: styles.toastContainer,
+        });
+      }
+    }, [error]);
 
-After that we have to update the mobile UI to include the `TextInput` where the user inputs an E.164 formatted phone number e.g. `447700900000` or `14155550100` , `Button` components and inform the user there is an ongoing background process.
-Paste the following code:
+  // we'll handle SubscriberCheck in the function below
+  const onPressHandler = () => {};
 
-```
-const App = ()=> {
-  ...
   return (
     <>
      <StatusBar barStyle='light-content' />
@@ -171,68 +152,62 @@ const App = ()=> {
       </SafeAreaView>
     </>
   )
-}
+};
 ```
 
 Your app should now look like this:
 
 ![alt text](./images/step1.jpg 'Step1')
 
-In order to perform the SubscriberCheck Authentication, in the `onPressHandler` function and paste the following lines of code:
+The user will being the SubscriberCheck Authentication by clicking the `Button`. So, we need to set the loading state and create the payload to submit to the server. We do this within the `onPressHandler` function:
 
 ```
 const onPressHandler = () => {
-   setLoading(true);
-    const body = {
-      phone_number:  phoneNumber,
-    };
-    console.log(body);
-}
+  setLoading(true);
+  const body = {
+    phone_number:  phoneNumber,
+  };
+  console.log(body);
+};
 ```
 
-First off we set our loading state to `true` and this is necessary so we give the user a visual cue that something (a HTTP network request) is happening via our loading indicator. Next, we set construct the body object setting the `phone_number` field to the `phoneNumber`
+The loading state to `true` to give the user a visual cue that work (a HTTP network request) is in progress via our loading indicator. Next, we construct the body object setting the `phone_number` field to the `phoneNumber`.
 
 ## Create a SubscriberCheck using the SubscriberCheck API
 
-In order to do this, in our `onPressHandler` under our `console.log` statement we paste the following code:
+With our body request payload ready we're ready to make requests to our server. First, let's import and setup Axios to know where our development server is:
 
+```js
+import FlashMessage, { showMessage } from 'react-native-flash-message';
+
+import axios from 'axios';
+axios.defaults.baseURL = 'https://jolly-dolphin-30.loca.lt';
 ```
+
+Then update the `onPressHandler` to make a request to create a SubscriberCheck:
+
+```js
 const onPressHandler = () => {
-  ...
-    //make a request to the SubscriberCheck endpoint to get back the check_url
-    try {
-      const response = await axios.post('/subscriber-check', body);
-      console.log(response.data);
-
-    } catch (e) {
-      setLoading(false);
-      setError(e.message);
-    }
-}
-```
-
-The code in the `onPressHandler` thus far is:
-
-```
-const onPressHandler = () => {
-   setLoading(true);
-    const body = {
-      phone_number: phoneNumber,
-    };
-    console.log(body);
-    //make a request to the SubscriberCheck endpoint to get back the check_url
-    try {
-      const response = await axios.post('/subscriber-check', body);
-      console.log(response.data);
-
-    } catch (e) {
-      setLoading(false);
-      setError(e.message);
-    }
+  setLoading(true);
+  const body = {
+    phone_number: phoneNumber,
+  };
+  console.log(body);
+  
+  try {
+    const response = await axios.post('/subscriber-check', body);
+    console.log(response.data);
+  }
+  catch (e) {
+    setLoading(false);
+    setError(e.message);
+  }
 }
 ```
 
 Here, we make a network request to the SubscriberCheck endpoint in order to get back the SubscriberCheck URL (`check_url`) and the `check_id` which we'll use in a future step.
+
+**TODO: <----------------reviewed to here -------------->**
 
 ## Request the SubscriberCheck URL on the Mobile Device over Mobile Data
 
@@ -343,29 +318,30 @@ The last thing we need to do is inform users whether or not there is a match i.e
 
 //check if there is a match i.e. phone number has been verified and no_sim_change and render toast UI
 React.useEffect(() => {
-if (data) {
-data.match && data.no_sim_change
-? showMessage({
-message: 'Phone Verified',
-type: 'success',
-style: styles.toastContainer,
-})
-: showMessage({
-message: 'Verification failed. Please Try Again Later',
-type: 'danger',
-style: styles.toastContainer,
-});
-}
-}, [data]);
+  if (data) {
+    data.match && data.no_sim_change
+    ? showMessage({
+      message: 'Phone Verified',
+      type: 'success',
+      style: styles.toastContainer,
+    })
+    : showMessage({
+        message: 'Verification failed. Please Try Again Later',
+        type: 'danger',
+        style: styles.toastContainer,
+      });
+    }
+  }, [data]);
+
 //render toast UI if there's an error
 React.useEffect(() => {
-if (error) {
-showMessage({
-message: error,
-type: 'danger',
-style: styles.toastContainer,
-});
-}
+  if (error) {
+    showMessage({
+      message: error,
+      type: 'danger',
+      style: styles.toastContainer,
+    });
+  }
 }, [error]);
 
 ```
