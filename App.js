@@ -15,6 +15,7 @@ import {
   StatusBar,
   TextInput,
   Button,
+  ActivityIndicator,
 } from 'react-native';
 import { Dimensions } from 'react-native';
 import FlashMessage, { showMessage } from 'react-native-flash-message';
