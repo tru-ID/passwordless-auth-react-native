@@ -161,7 +161,7 @@ Your app should now look like this:
 
 The user will being the SubscriberCheck Authentication by clicking the `Button`. So, we need to set the loading state and create the payload to submit to the server. We do this within the `onPressHandler` function:
 
-```
+```js
 const onPressHandler = () => {
   setLoading(true);
   const body = {
@@ -205,150 +205,124 @@ const onPressHandler = () => {
 }
 ```
 
-Here, we make a network request to the SubscriberCheck endpoint in order to get back the SubscriberCheck URL (`check_url`) and the `check_id` which we'll use in a future step.
-
-**TODO: <----------------reviewed to here -------------->**
+Here, we make a network request to our app server's SubscriberCheck endpoint in order to get back the SubscriberCheck URL (`check_url`) and the `check_id` which we'll use in a future step.
 
 ## Request the SubscriberCheck URL on the Mobile Device over Mobile Data
 
-The next step is requesting the SubscriberCheck URL on mobile device over mobile data and for this we'll use the **tru-ID** [React Native SDK](https://github.com/tru-ID/tru-sdk-react-native).
+The next step is requesting the SubscriberCheck URL on mobile device over mobile data. For this we'll use the **tru.ID** [React Native SDK](https://github.com/tru-ID/tru-sdk-react-native).
 
 The first step is to install it via:
 
-```
+```bash
 npm install tru-sdk-react-native
 ```
 
-Afterwards we add it to our list of imports at the top:
+Then add the `import` to the top of `App.js`:
 
-```
-...
+```js
 import TruSDK from 'tru-sdk-react-native'
 ```
 
-The **tru-ID** React Native SDK forces mobile data connection and makes a get request to the SubscriberCheck URL (`check_url`) and readies a result.
-Add the following lines in `onPressHandler` below `console.log(response.data)`
+The **tru.ID** React Native SDK `openCheckUrl(checkUrl)` function forces the request to the SubscriberCheck URL (`check_url`) to go over the mobile data connection.
 
-```
-const onPressHandler = () => {
-...
-//pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
-await TruSDK.openCheckUrl(response.data.check_url);
+Add the `openCheckUrl` call to the `onPressHandler`:
+
+```js
+const onPressHandler = async () => {
+  setLoading(true);
+  const body = {
+    phone_number: phoneNumber,
+  };
+  console.log(body);
+
+  try {
+    const response = await axios.post('/subscriber-check', body);
+    console.log(response.data);
+
+    await TruSDK.openCheckUrl(response.data.check_url);
+    console.log('check_url request compeleted');
+  } catch (e) {
+    setLoading(false);
+    setError(e.message);
+  }
 }
 ```
 
-The code in the `onPressHandler` thus far is:
+## Get the SubscriberCheck Result via the Application Server
 
+With the `check_url` request complete we can now make a request to the application server to get the SubscriberCheck result.
+
+Add a new stateful value called `data`:
+
+```js
+const App = () => {
+  const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    ...
 ```
-const onPressHandler = () => {
-   setLoading(true);
-    const body = {
-      phone_number:  phoneNumber,
-    };
-    console.log(body);
-    //make a request to the SubscriberCheck endpoint to get back the check_url
-    try {
-      const response = await axios.post('/subscriber-check', body);
-      console.log(response.data);
-      //pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
-await TruSDK.openCheckUrl(response.data.check_url);
 
-    } catch (e) {
-      setLoading(false);
-      setError(e.message);
-    }
+Make a request to the `subscriber-check/{check_id}` endpoint to get the result, save it to state with `setData` and set loading to `false`:
+
+```js
+const onPressHandler = async () => {
+  setLoading(true);
+  const body = {
+    phone_number: phoneNumber,
+  };
+  console.log(body);
+
+  try {
+    const response = await axios.post('/subscriber-check', body);
+    console.log(response.data);
+
+    await TruSDK.openCheckUrl(response.data.check_url);
+    const resp = await axios.get(
+      `/subscriber-check/${response.data.check_id}`
+    );
+    console.log(resp.data);
+    setData(resp.data);
+    setLoading(false);
+  } catch (e) {
+    setLoading(false);
+    setError(e.message);
+  }
 }
 ```
 
-## Mobile Device requests SubscriberCheck Result via the Application Server
-
-We can now make a request to `subscriber-check/{check_id}` and get that result and save it to state and set loading to `false`. Add the following lines to `onPressHandler` below `await TruSDK.openCheckUrl(response.data.check_url)`
-
-```
-const onPressHandler = () => {
-  ...
-     // make request to subscriber check endpoint to get the SubscriberCheck result
-      const resp = await axios.get(
-        `/subscriber-check/${response.data.check_id}`
-      );
-      console.log(resp.data);
-      setData(resp.data);
-      setLoading(false);
-}
-```
-
-The final code in the `onPressHandler` should be:
-
-```
-const onPressHandler = () => {
-setLoading(true);
-const body = {
-phone_number: phoneNumber,
-};
-console.log(body);
-//make a request to the SubscriberCheck endpoint to get back the check_url
-try {
-const response = await axios.post('/subscriber-check', body);
-console.log(response.data);
-//pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
-await TruSDK.openCheckUrl(response.data.check_url);
-//make request to subscriber check endpoint to get the SubscriberCheck result
-const resp = await axios.get(
-`/subscriber-check/${response.data.check_id}`
-);
-console.log(resp.data);
-setData(resp.data);
-setLoading(false);
-} catch (e) {
-setLoading(false);
-setError(e.message);
-}
-}
-```
-
-Your app UI while initiating the SubscriberCheck, using the **tru-ID** React Native SDK and requesting results will look like this:
+With that in place your app will look as follows when creating the SubscriberCheck, requesting the `check_url` using the **tru.ID** SDK, and then retrieving the SubscriberCheck result:
 
 ![alt text](./images/loading.jpg 'loading state')
 
 # Updating the UI with the result
 
-The last thing we need to do is inform users whether or not there is a match i.e. the phone number is verified and if the SIM has not changed recently. We also need to take care of any errors and let the user know. For that we'll use toast notifications. Paste the following code into `app.js` before `onPressHandler`
+The last things we need to do are inform users whether or not there is a SubscriberCheck match (i.e. the phone number is verified) and if the SIM has changed recently. For this we'll use toast notifications.
 
-```
+Update `App.js` with the following within your `App()`:
 
+```js
 //check if there is a match i.e. phone number has been verified and no_sim_change and render toast UI
 React.useEffect(() => {
   if (data) {
     data.match && data.no_sim_change
-    ? showMessage({
-      message: 'Phone Verified',
-      type: 'success',
-      style: styles.toastContainer,
-    })
-    : showMessage({
-        message: 'Verification failed. Please Try Again Later',
-        type: 'danger',
-        style: styles.toastContainer,
-      });
-    }
-  }, [data]);
-
-//render toast UI if there's an error
-React.useEffect(() => {
-  if (error) {
-    showMessage({
-      message: error,
-      type: 'danger',
-      style: styles.toastContainer,
-    });
+      ? showMessage({
+          message: 'Phone Verified',
+          type: 'success',
+          style: styles.toastContainer,
+        })
+      : showMessage({
+          message: 'Verification failed. Please Try Again Later',
+          type: 'danger',
+          style: styles.toastContainer,
+        });
   }
-}, [error]);
-
+}, [data]);
 ```
 
-Above we have two `React.useEffect` functions. In the first function, we add `data` as a dependency so whenever `data` changes the effect re-runs. Inside the effect we check if we have data and subsequently check if we have a match and if the SIM has not changed. If that's true we render a toast UI with a `Phone Verfied` message (this can be anything you want). Else, we render a toast UI with a `Verification failed. Please Try Again Later` message.
-
-In the second function we add `error` as a dependency so whenever `error` changes the effect re-runs. Inside the effect we check if we have an error and render a toast UI with the error message.
+In this `React.useEffect` function we add `data` as a dependency so whenever `data` changes the effect re-runs. Inside the effect we check if we have data and subsequently check if we have a match and if the SIM has not changed. If both of these are confirmed we render a toast UI with a `Phone Verfied` message (this can be anything you want). Otherwise, we render a toast UI with a `Verification failed. Please Try Again Later` message.
 
 Your UI if the SubscriberCheck is successful should look like this:
 
@@ -356,14 +330,11 @@ Your UI if the SubscriberCheck is successful should look like this:
 
 ## Wrapping Up
 
-There you have it, you have successfully integrated **tru-ID's** SubscriberCheck API with your React Native Application.
+There you have it, you have successfully integrated **tru.ID** SubscriberCheck with your React Native Application to verify a phone number and determine if the SIM card for the device has changed recently.
 
-If you have any questions get in touch via help@tru.id
+If you have any questions get in touch via [help@tru.id](mailto:help@tru.id).
 
 ## Resources
 
 [SubscriberCheck Integration](https://developer.tru.id/docs/subscriber-check/integration)
 
-```
-
-```
