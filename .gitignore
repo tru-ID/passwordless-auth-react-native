@@ -20,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-yarn.lock
+
 # Android/IntelliJ
 #
 build/
@@ -57,5 +57,3 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-
-yarn.lock

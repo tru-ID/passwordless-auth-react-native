@@ -16,11 +16,9 @@ import {
   TextInput,
   Button,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Picker } from '@react-native-picker/picker';
-import { Dimensions } from 'react-native';
-import FlashMessage, { showMessage } from 'react-native-flash-message';
+import FlashMessage, {showMessage} from 'react-native-flash-message';
 import axios from 'axios';
 import TruSDK from 'tru-sdk-react-native';
 const App = () => {
@@ -72,7 +70,7 @@ const App = () => {
       await TruSDK.openCheckUrl(response.data.check_url);
       // make request to subscriber check endpoint to get the SubscriberCheck result
       const resp = await axios.get(
-        `/subscriber-check/${response.data.check_id}`
+        `/subscriber-check/${response.data.check_id}`,
       );
       console.log(resp.data);
       setData(resp.data);
@@ -84,26 +82,26 @@ const App = () => {
   };
   return (
     <>
-      <StatusBar barStyle='light-content' />
+      <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <Text style={styles.heading}>Enter your phone number</Text>
         <Text style={styles.paragraph}>and we'll handle the rest</Text>
         <View style={styles.form}>
           <TextInput
             style={styles.textInput}
-            keyboardType='phone-pad'
-            placeholder='ex. (415) 555-0100'
-            placeholderTextColor='#d3d3d3'
-            onChangeText={(text) => setPhoneNumber(text)}
+            keyboardType="phone-pad"
+            placeholder="ex. (415) 555-0100"
+            placeholderTextColor="#d3d3d3"
+            onChangeText={text => setPhoneNumber(text)}
             value={phoneNumber}
           />
         </View>
         {loading ? (
-          <ActivityIndicator size='large' color='#00ff00' />
+          <ActivityIndicator size="large" color="#00ff00" />
         ) : (
           <Button
-            title='Authenticate'
-            color='#e67e22'
+            title="Authenticate"
+            color="#e67e22"
             onPress={onPressHandler}
           />
         )}
