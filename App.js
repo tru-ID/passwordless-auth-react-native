@@ -39,7 +39,7 @@ const App = () => {
             style: styles.toastContainer,
           })
         : showMessage({
-            message: 'Verification failed. Please Try Again Later',
+            message: 'Verification failed',
             type: 'danger',
             style: styles.toastContainer,
           });
