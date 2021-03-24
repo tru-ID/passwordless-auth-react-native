@@ -14,7 +14,7 @@ import {
   Text,
   StatusBar,
   TextInput,
-  Button,
+  TouchableOpacity,
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
@@ -99,11 +99,9 @@ const App = () => {
         {loading ? (
           <ActivityIndicator size="large" color="#00ff00" />
         ) : (
-          <Button
-            title="Authenticate"
-            color="#e67e22"
-            onPress={onPressHandler}
-          />
+          <TouchableOpacity onPress={onPressHandler} style={styles.button}>
+            <Text style={styles.buttonText}>Authenticate</Text>
+          </TouchableOpacity>
         )}
 
         <FlashMessage />
@@ -116,6 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: 10,
+    backgroundColor: '#FFFFFF',
   },
   toastContainer: {
     flex: 1,
@@ -124,17 +123,27 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 0.1 * Dimensions.get('window').width,
-    fontFamily: 'NotoSansJP-Bold',
   },
   paragraph: {
     fontSize: 20,
-    fontFamily: 'NotoSansJP-Regular',
   },
   form: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
     marginBottom: 20,
+  },
+  button: {
+    elevation: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e67e22',
+    color: '#ffffff',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  buttonText: {
+    color: '#ffffff',
   },
   textInput: {
     padding: 15,
