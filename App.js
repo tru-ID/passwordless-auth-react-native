@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
     elevation: 7,
     height: 50,
     backgroundColor: '#fff',
-    fontFamily: 'inherit',
   },
 });
 
