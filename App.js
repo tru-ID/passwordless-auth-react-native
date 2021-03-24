@@ -14,7 +14,7 @@ import {
   Text,
   StatusBar,
   TextInput,
-  Button,
+  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import {Dimensions} from 'react-native';
@@ -38,20 +38,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: 10,
+    backgroundColor: '#FFFFFF',
+  },
+  toastContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   heading: {
     fontSize: 0.1 * Dimensions.get('window').width,
-    fontFamily: 'NotoSansJP-Bold',
   },
   paragraph: {
     fontSize: 20,
-    fontFamily: 'NotoSansJP-Regular',
   },
   form: {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
     marginBottom: 20,
+  },
+  button: {
+    elevation: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e67e22',
+    color: '#ffffff',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  buttonText: {
+    color: '#ffffff',
   },
   textInput: {
     padding: 15,
