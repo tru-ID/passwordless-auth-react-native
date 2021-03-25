@@ -1,4 +1,4 @@
-# SIM Card Based Mobile Authentication With React Native
+# Passwordless Mobile Authentication and SIM SWap Detection with React Native
 
 ## Requirements
 
@@ -15,7 +15,7 @@
 Clone the `starter-files` branch via:
 
 ```
-git clone -b starter-files --single-branch https://github.com/tru-ID/sim-card-auth-react-native.git
+git clone -b starter-files --single-branch https://github.com/tru-ID/passwordless-auth-react-native
 ```
 
 To restore dependencies, open a new terminal and run:
