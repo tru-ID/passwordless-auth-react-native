@@ -21,7 +21,7 @@ git clone -b starter-files --single-branch https://github.com/tru-ID/passwordles
 To restore dependencies, open a new terminal and run:
 
 ```
-npm run restore-mobile
+npm install
 ```
 
 Create a [tru.ID Account](https://tru.id)
