@@ -6213,10 +6213,10 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
-tru-sdk-react-native@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/tru-sdk-react-native/-/tru-sdk-react-native-0.2.0.tgz#7e092799c1d9318ca11345f1b8b8e11d144cddd8"
-  integrity sha512-jvyWUtWV6XPyhdyNYltdUvSSMIxszW0wTb8NVvhHsSLkJ95rqvt5NRG92dyeISWWVwlE+VBM1n7x3pmQpdyi3w==
+tru-sdk-react-native@~0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/tru-sdk-react-native/-/tru-sdk-react-native-0.2.1.tgz#e61111a0134234c0dfc898fd7ebc5a7c8273cfd5"
+  integrity sha512-cMl8gvIMF/IpDdcUY0RImoDzYBQrOK3OkZrI2YT3TCvfKFu0VPWrMUKLKwNcRhTDZXpE6yE2NLmF7spwztDZbA==
 
 tslib@^1.8.1:
   version "1.14.1"
