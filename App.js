@@ -20,7 +20,7 @@ import {
 } from 'react-native';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
 import axios from 'axios';
-import TruSDK from 'tru-sdk-react-native';
+import TruSDK from '@tru_id/tru-sdk-react-native';
 const App = () => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
   const [data, setData] = React.useState();
