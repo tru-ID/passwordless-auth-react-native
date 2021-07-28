@@ -1127,6 +1127,11 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@tru_id/tru-sdk-react-native@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@tru_id/tru-sdk-react-native/-/tru-sdk-react-native-0.3.2.tgz#08d45ce6f9b4fa81549fa243798b6ec0faa14bae"
+  integrity sha512-hsAqZIPmb0lz94Um5gPKPAiGqEwT1nXuIWXlOhWY+JA+Ucx6zBKkXEaewbPXeAw8wB8U9sGvpoeHzvZFDausng==
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
   version "7.1.14"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.14.tgz#faaeefc4185ec71c389f4501ee5ec84b170cc402"
@@ -5221,6 +5226,11 @@ react-native-iphone-x-helper@^1.3.0:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
+react-native-linear-gradient@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
+
 react-native@0.64.0:
   version "0.64.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.64.0.tgz#c3bde5b638bf8bcf12bae6e094930d39cb942ab7"
@@ -6212,11 +6222,6 @@ tr46@^2.0.2:
   integrity sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   dependencies:
     punycode "^2.1.1"
-
-tru-sdk-react-native@~0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/tru-sdk-react-native/-/tru-sdk-react-native-0.2.1.tgz#e61111a0134234c0dfc898fd7ebc5a7c8273cfd5"
-  integrity sha512-cMl8gvIMF/IpDdcUY0RImoDzYBQrOK3OkZrI2YT3TCvfKFu0VPWrMUKLKwNcRhTDZXpE6yE2NLmF7spwztDZbA==
 
 tslib@^1.8.1:
   version "1.14.1"

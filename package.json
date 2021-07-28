@@ -11,11 +11,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@tru_id/tru-sdk-react-native": "^0.3.2",
     "axios": "^0.21.1",
     "react": "17.0.1",
     "react-native": "0.64.0",
     "react-native-flash-message": "^0.1.23",
-    "@tru_id/tru-sdk-react-native": "^0.3.2"
+    "react-native-linear-gradient": "^2.5.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
