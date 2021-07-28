@@ -15,7 +15,7 @@
     "react": "17.0.1",
     "react-native": "0.64.0",
     "react-native-flash-message": "^0.1.23",
-    "tru-sdk-react-native": "^0.3.2"
+    "@tru_id/tru-sdk-react-native": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
