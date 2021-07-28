@@ -58,30 +58,30 @@ import LinearGradient from 'react-native-linear-gradient'
    }, [error]);
    // we'll handle SubscriberCheck in the function below
    const onPressHandler = async () => {
- 
-     setData({match: true, no_sim_change: true})
     
-    //  const body = {
-    //    phone_number: phoneNumber,
-    //  };
-    //  console.log(body);
-    //  // make a request to the SubscriberCheck endpoint to get back the check_url
-    //  try {
-    //    const response = await axios.post('/subscriber-check', body);
-    //    console.log(response.data);
-    //    // pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
-    //    await TruSDK.openCheckUrl(response.data.check_url);
-    //    // make request to subscriber check endpoint to get the SubscriberCheck result
-    //    const resp = await axios.get(
-    //      `/subscriber-check/${response.data.check_id}`,
-    //    );
-    //    console.log(resp.data);
-    //    setData(resp.data);
-    //    setLoading(false);
-    //  } catch (e) {
-    //    setLoading(false);
-    //    setError(e.message);
-    //  }
+    setLoading(true) 
+    
+     const body = {
+       phone_number: phoneNumber,
+     };
+     console.log(body);
+     // make a request to the SubscriberCheck endpoint to get back the check_url
+     try {
+       const response = await axios.post('/subscriber-check', body);
+       console.log(response.data);
+       // pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
+       await TruSDK.openCheckUrl(response.data.check_url);
+       // make request to subscriber check endpoint to get the SubscriberCheck result
+       const resp = await axios.get(
+         `/subscriber-check/${response.data.check_id}`,
+       );
+       console.log(resp.data);
+       setData(resp.data);
+       setLoading(false);
+     } catch (e) {
+       setLoading(false);
+       setError(e.message);
+     }
    };
    return (
      <>
