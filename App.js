@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
     height: 0.7 * Dimensions.get('window').height,
     padding: 15,
   },
+  logo: {
+    marginTop: 10,
+    width: 0.5 * Dimensions.get('window').width,
+    height: 200,
+  },
   toastContainer: {
     flex: 1,
     justifyContent: 'center',
