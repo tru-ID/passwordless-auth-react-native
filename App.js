@@ -17,6 +17,7 @@
    TouchableOpacity,
    ActivityIndicator,
    Dimensions,
+   Image
   } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
  import FlashMessage, {showMessage} from 'react-native-flash-message';
@@ -97,7 +98,10 @@ import LinearGradient from 'react-native-linear-gradient'
        <SafeAreaView style={styles.container}>
        <View style={styles.box}>
 
-    
+       <Image
+              style={styles.logo}
+              source={require('./images/tru-logo.png')}
+            />
          <Text style={styles.heading}>Enter your phone number</Text>
          <Text style={styles.paragraph}>and we'll handle the rest</Text>
       
@@ -146,6 +150,11 @@ import LinearGradient from 'react-native-linear-gradient'
     height: 0.7 * Dimensions.get('window').height,
     padding: 15,
    },
+   logo: {
+    marginTop: 10,
+    width: 0.5 * Dimensions.get('window').width,
+    height: 200,
+  },
    toastContainer: {
      flex: 1,
      justifyContent: 'center',
