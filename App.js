@@ -18,6 +18,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {Dimensions} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'
 import FlashMessage, {showMessage} from 'react-native-flash-message';
 
 const App = () => {
@@ -27,56 +28,85 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.container}>
+      <LinearGradient
+      colors={['rgba(25, 85, 255, 40)', 'rgba(10, 10, 50, 66)']}
+      useAngle={true}
+      angle={0}
+      style={{
+        flex: 1,
+      }}
+    >
         <FlashMessage />
-      </SafeAreaView>
+      </LinearGradient>
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginLeft: 10,
-    backgroundColor: '#FFFFFF',
-  },
-  toastContainer: {
+ const styles = StyleSheet.create({
+   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  heading: {
-    fontSize: 0.1 * Dimensions.get('window').width,
-  },
-  paragraph: {
-    fontSize: 20,
-  },
-  form: {
-    alignItems: 'center',
+   },
+   box: {
+    width: '90%',
+    borderRadius: 3,
+    backgroundColor: '#fff',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0.5, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    alignItems: 'center',
+    height: 0.7 * Dimensions.get('window').height,
+    padding: 15,
+   },
+   toastContainer: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center',
+   },
+   heading: {
+     fontSize: 0.1 * Dimensions.get('window').width,
+   },
+   paragraph: {
+     fontSize: 20,
+    marginBottom: 15
+   },
+   spinner: {
+    marginTop: 20,
   },
   button: {
-    elevation: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e67e22',
-    color: '#ffffff',
+    backgroundColor: '#1955ff',
+    color: '#fff',
     paddingVertical: 10,
     paddingHorizontal: 12,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#1955ff',
+    marginTop: 17,
+    width: '40%',
   },
   buttonText: {
-    color: '#ffffff',
+    color: '#fff',
   },
-  textInput: {
+   textInput: {
     padding: 15,
-    borderColor: '#20232a',
-    borderWidth: 3,
-    elevation: 7,
-    height: 50,
+    borderRadius: 3,
     backgroundColor: '#fff',
-  },
-});
+    borderColor: '#858585',
+    borderWidth: 0.4,
+    elevation: 7,
+    shadowColor: '#858585',
+    shadowOffset: { width: 0.5, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
+    color: '#000',
+    width: 0.7 * Dimensions.get('window').width,
+   },
+ });
 
 export default App;
