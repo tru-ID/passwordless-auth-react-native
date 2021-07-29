@@ -29,15 +29,8 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <LinearGradient
-        colors={['rgba(25, 85, 255, 40)', 'rgba(10, 10, 50, 66)']}
-        useAngle={true}
-        angle={0}
-        style={{
-          flex: 1,
-        }}>
-        <FlashMessage />
-      </LinearGradient>
+      <SafeAreaView style={styles.container}></SafeAreaView>
+      <FlashMessage />
     </>
   );
 };
@@ -48,24 +41,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  box: {
-    width: '90%',
-    borderRadius: 3,
-    backgroundColor: '#fff',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {width: 0.5, height: 1},
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 0.7 * Dimensions.get('window').height,
-    padding: 15,
-  },
+
   logo: {
     marginTop: 10,
     width: 0.5 * Dimensions.get('window').width,
     height: 200,
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   toastContainer: {
     flex: 1,
