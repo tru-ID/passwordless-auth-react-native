@@ -19,7 +19,6 @@
    Dimensions,
    Image
   } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient'
  import FlashMessage, {showMessage} from 'react-native-flash-message';
  import axios from 'axios';
  import TruSDK from '@tru_id/tru-sdk-react-native';
@@ -59,7 +58,7 @@ import LinearGradient from 'react-native-linear-gradient'
    }, [error]);
    // we'll handle SubscriberCheck in the function below
    const onPressHandler = async () => {
-    
+   
     setLoading(true) 
     
      const body = {
@@ -87,24 +86,15 @@ import LinearGradient from 'react-native-linear-gradient'
    return (
      <>
        <StatusBar barStyle="light-content" />
-       <LinearGradient
-      colors={['rgba(25, 85, 255, 40)', 'rgba(10, 10, 50, 66)']}
-      useAngle={true}
-      angle={0}
-      style={{
-        flex: 1,
-      }}
-    >
        <SafeAreaView style={styles.container}>
-       <View style={styles.box}>
-
        <Image
               style={styles.logo}
               source={require('./images/tru-logo.png')}
             />
          <Text style={styles.heading}>Enter your phone number</Text>
          <Text style={styles.paragraph}>and we'll handle the rest</Text>
-      
+          <View style={styles.center}>
+
            <TextInput
              style={styles.textInput}
              keyboardType="phone-pad"
@@ -121,11 +111,10 @@ import LinearGradient from 'react-native-linear-gradient'
              <Text style={styles.buttonText}>Authenticate</Text>
            </TouchableOpacity>
          )}
- 
-         </View>
+          </View>
        </SafeAreaView>
          <FlashMessage />
-       </LinearGradient>
+     
      </>
    );
  };
@@ -136,24 +125,15 @@ import LinearGradient from 'react-native-linear-gradient'
     justifyContent: 'center',
     alignItems: 'center',
    },
-   box: {
-    width: '90%',
-    borderRadius: 3,
-    backgroundColor: '#fff',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0.5, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 0.7 * Dimensions.get('window').height,
-    padding: 15,
-   },
+ 
    logo: {
     marginTop: 10,
     width: 0.5 * Dimensions.get('window').width,
     height: 200,
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center'
   },
    toastContainer: {
      flex: 1,
