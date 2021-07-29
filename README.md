@@ -76,6 +76,6 @@ While trying to run on Android, you might run into `Could not find or load main 
 
 ## Meta
 
-Distributed under the MIT License. See [LICENSE](https://github.com/tru-ID/sim-card-auth-react-native/blob/main/LICENSE.md)
+Distributed under the MIT License. See [LICENSE](https://github.com/tru-ID/passwordless-auth-react-native/blob/main/LICENSE)
 
 [**tru.ID**](https://tru.id)
