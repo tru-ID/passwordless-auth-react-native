@@ -71,9 +71,7 @@ const App = () => {
       // pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
       await TruSDK.openCheckUrl(response.data.check_url);
       // make request to subscriber check endpoint to get the SubscriberCheck result
-      const resp = await axios.get(
-        `/subscriber-check/${response.data.check_id}`,
-      );
+      const resp = await axios.get(`/subscriber-check/${response.data.check_id}`);
       console.log(resp.data);
       setData(resp.data);
       setLoading(false);
@@ -100,11 +98,7 @@ const App = () => {
           />
 
           {loading ? (
-            <ActivityIndicator
-              style={styles.spinner}
-              size="large"
-              color="#00ff00"
-            />
+            <ActivityIndicator style={styles.spinner} size="large" color="#00ff00" />
           ) : (
             <TouchableOpacity onPress={onPressHandler} style={styles.button}>
               <Text style={styles.buttonText}>Authenticate</Text>
