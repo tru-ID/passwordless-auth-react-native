@@ -20,17 +20,17 @@ import {
   Image,
 } from 'react-native';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
-import axios from 'axios';
-import TruSDK from '@tru_id/tru-sdk-react-native';
-const App = () => {
-  const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [data, setData] = React.useState();
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
-  // setup axios BaseURL in the format : https://{subdomain}.loca.lt
-  axios.defaults.baseURL = 'https://{subdomain}.loca.lt';
+import TruSdkReactNative from '@tru_id/tru-sdk-react-native'
 
-  // check if there is a match i.e. phone number has been verified and no_sim_change and render toast UI
+import axios from 'axios'
+axios.defaults.baseURL = 'https://{subdomain}.loca.lt'
+
+const App = () => {
+  const [phoneNumber, setPhoneNumber] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState(null)
+  const [data, setData] = React.useState(null)
+
   React.useEffect(() => {
     if (data) {
       data.match && data.no_sim_change
@@ -43,43 +43,96 @@ const App = () => {
             message: 'Verification failed',
             type: 'danger',
             style: styles.toastContainer,
-          });
+
+          })
     }
-  }, [data]);
-  // render toast UI if there's an error
+  }, [data])
+
   React.useEffect(() => {
     if (error) {
       showMessage({
         message: error,
         type: 'danger',
         style: styles.toastContainer,
-      });
+      })
     }
-  }, [error]);
+  }, [error])
+
   // we'll handle SubscriberCheck in the function below
   const onPressHandler = async () => {
-    setLoading(true);
-
+    setLoading(true)
     const body = {
       phone_number: phoneNumber,
-    };
-    console.log(body);
-    // make a request to the SubscriberCheck endpoint to get back the check_url
-    try {
-      const response = await axios.post('/subscriber-check', body);
-      console.log(response.data);
-      // pass the check url into the Tru SDK and perform the GET request to the SubscriberCheck check url
-      await TruSDK.openCheckUrl(response.data.check_url);
-      // make request to subscriber check endpoint to get the SubscriberCheck result
-      const resp = await axios.get(`/subscriber-check/${response.data.check_id}`);
-      console.log(resp.data);
-      setData(resp.data);
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      setError(e.message);
     }
-  };
+    console.log(body)
+
+    try {
+      const response = await axios.post('/v0.2/subscriber-check', body)
+      console.log(response.data)
+
+      const checkResponse = await TruSdkReactNative.openWithDataCellular(
+        response.data.check_url
+      );
+  
+      console.log('check_url request compeleted')
+
+      if ('error' in checkResponse) {
+        console.log(`Error in openWithDataCellular: ${checkResponse.error_description}`)
+        setLoading(false)
+        showMessage({
+          message: 'Verification failed',
+          type: 'danger',
+          style: styles.toastContainer,
+        })
+      } else if ('http_status' in checkResponse) {
+        const httpStatus = checkResponse.http_status
+      
+        if (httpStatus === 200 && checkResponse.response_body !== undefined) {
+          console.log(`Requesting PhoneCheck URL`)
+      
+          if ('error' in checkResponse.response_body) {
+            const body = checkResponse.response_body
+            console.log(`Error: ${body.error_description}`)
+            showMessage({
+              message: `Verification failed: ${body.error_description}`,
+              type: 'danger',
+              style: styles.toastContainer,
+            })
+          } else {
+            const body = checkResponse.response_body
+      
+            try {
+              const checkStatusRes = await axios.post('/v0.2/subscriber-check/exchange-code', { check_id: body.check_id, code: body.code })
+      
+              console.log('[CHECK RESULT]:', checkStatusRes.data)
+      
+              setData(checkStatusRes.data)
+              setLoading(false)
+            } catch (error) {
+              showMessage({
+                message: `Error retrieving check result: ${error.message}`,
+                type: 'danger',
+                style: styles.toastContainer,
+              })
+      
+              return;
+            }
+          }
+        } else {
+          const body = resp.response_body;
+          showMessage({
+            message: `Error: ${body.detail}`,
+            type: 'danger',
+            style: styles.toastContainer,
+          })
+        }
+      }
+    } catch (e) {
+      setLoading(false)
+      setError(e.message)
+    }
+  }
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -93,12 +146,16 @@ const App = () => {
             keyboardType="phone-pad"
             placeholder="ex. (415) 555-0100"
             placeholderTextColor="#d3d3d3"
-            onChangeText={text => setPhoneNumber(text)}
+            onChangeText={(text) => setPhoneNumber(text)}
             value={phoneNumber}
           />
 
           {loading ? (
-            <ActivityIndicator style={styles.spinner} size="large" color="#00ff00" />
+            <ActivityIndicator
+              style={styles.spinner}
+              size="large"
+              color="#00ff00"
+            />
           ) : (
             <TouchableOpacity onPress={onPressHandler} style={styles.button}>
               <Text style={styles.buttonText}>Authenticate</Text>
@@ -108,8 +165,8 @@ const App = () => {
       </SafeAreaView>
       <FlashMessage />
     </>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
