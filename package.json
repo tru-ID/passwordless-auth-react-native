@@ -12,7 +12,7 @@
     "prettier": "prettier ./*.{js,json} --write"
   },
   "dependencies": {
-    "@tru_id/tru-sdk-react-native": "^1.0.0-preview",
+    "@tru_id/tru-sdk-react-native": "^1.0.0",
     "axios": "^0.21.1",
     "react": "17.0.1",
     "react-native": "0.64.0",
